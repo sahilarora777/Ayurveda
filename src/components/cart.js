@@ -46,14 +46,14 @@ const Cart = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-5  gap-2">
           {products.length > 0 ? (
             products.map((product) => (
                 <div key={product._id} className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-auto">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="w-full h-40 object-cover"
+                  className="w-full h-40 object-fill"
                 />
                 <div className="p-4 flex-grow">
                   <h3 className="text-2xl font-bold text-gray-800">{product.name}</h3>

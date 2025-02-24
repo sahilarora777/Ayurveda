@@ -31,11 +31,11 @@ const benefits = [
 
 const Card = () => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-8 p-6 object-fill">
+    <div className="grid grid-cols-5 gap-4  object-fill">
       {benefits.map((benefit) => (
         <div key={benefit.title} className="bg-white rounded-2xl shadow-md p-4 text-center">
-          <img src={benefit.image} alt={benefit.title} className="w-80 h-[30vh] mx-auto mb-4 object-cover" />
-          <h3 className="text-4xl font-semibold">{benefit.title}</h3>
+          <img src={benefit.image} alt={benefit.title} className="w-80 h-[30vh] mx-auto mb-4 object-fil" />
+          <h3 className="text-3xl font-semibold">{benefit.title}</h3>
           <p className="text-2xl gray-600">{benefit.description}</p>
         </div>
       ))}

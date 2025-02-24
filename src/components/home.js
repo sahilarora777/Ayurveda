@@ -91,7 +91,7 @@ const HomeProducts = () => {
           {products.length > 0 ? (
             products.map(product => (
               <div key={product._id} className="px-4">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-4 object-cover">
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-4 object-contain">
                   <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-contain" />
                   <div>
                     <h3 className="text-4xl font-semibold">{product.name}</h3>

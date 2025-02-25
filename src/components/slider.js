@@ -56,31 +56,28 @@ const sliderSettings = {
 const HomePage = () => {
   return (
 <div className="p-0 max-w-screen-lg mx-auto">
-  <h2 className="text-center text-2xl font-bold mb-4">LATEST READS</h2>
-  <div className="grid grid-cols-3 gap-10 ">
+  <h2 className="text-center text-2xl font-bold mb-6">LATEST READS</h2>
+  <div className="grid grid-cols-3 gap-6">
     {articles.map((article, index) => (
-      <div key={index} className="shadow-lg bg-white flex flex-col h-full">
-        <img src={article.image} alt={article.title} className="w-full h-30 object-contain" />
-        <div className="p-4 flex flex-col justify-between flex-grow">
-          <h3 className="text-3xl font-semibold mt-4">{article.title}</h3>
-          <p className="text-xl text-gray-600 flex-grow mt-5">{article.description}</p>
-          <button className="mt-4 bg-blue-500 text-white text-2xl px-4 py-2 rounded w-full">
+      <div key={index} className="shadow-lg  border: 2px solid #136a2f  bg-white rounded-lg overflow-hidden">
+        <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">{article.category}</h3>
+          <p className="text-gray-800 text-sm font-medium ">{article.title}</p>
+          <button className=" bg-black text-white text-sm px-4 py-2 rounded">
             Read More
           </button>
         </div>
       </div>
     ))}
   </div>
-
-
-
       {/* Experience Ayurveda Section */}
       <div className="mt-12 bg-green-50 p-8 text-center w-full">
         <h2 className="text-3xl font-bold text-green-700">Experience Ayurveda</h2>
         <Slider {...sliderSettings} className="mt-4">
           {AyurvedaSlides.map((slide, index) => (
             <div key={index} className="w-full shadow-lg p-4 bg-white">
-              <img src={slide.image} alt={slide.title} className="w-full h-[30vh] object-fill" />
+              <img src={slide.image} alt={slide.title} className="w-full h-[40vh] object-cover" />
               <div className="p-4">
               <p className="text-2xl font-semibold text-green-500">{slide.title}</p>
                 <p className="text-2xl text-gray-700">{slide.description}</p>

@@ -37,7 +37,7 @@ const Banner = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => (
-              <div key={product._id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+              <div key={product._id} className="bg-white  rounded-2xl shadow-lg overflow-hidden border border-gray-200">
                 <img
                   src={product.imageUrl}
                   alt={product.name}

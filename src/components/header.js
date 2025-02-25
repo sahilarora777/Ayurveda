@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "antd/dist/reset.css";
 import { Layout, Menu } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import logo from "../assets/logo.png";
 
 const { Header } = Layout;

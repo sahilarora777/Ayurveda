@@ -32,7 +32,7 @@ const AppHeader = () => {
       <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
         <img
           src={logo}
-          alt="Ayurveda Logo"
+          alt="Ayurvedas Logo"
           style={{
             height: "50px",
             width: "50px",

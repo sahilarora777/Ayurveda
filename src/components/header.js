@@ -25,7 +25,6 @@ const AppHeader = () => {
         display: "flex",
         alignItems: "center",
         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-        borderBottom: "4px solid #d4e7c5",
         height: "100px",
       }}
     >

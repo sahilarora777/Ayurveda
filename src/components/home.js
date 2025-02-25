@@ -110,7 +110,6 @@ const HomeProducts = () => {
                       >
                         Add to Cart
                       </button>
-                      <button className="bg-black text-white px-6 py-3 text-lg rounded-lg">Order</button>
                     </div>
                   </div>
                 </div>

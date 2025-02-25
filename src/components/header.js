@@ -78,7 +78,6 @@ const AppHeader = () => {
         <Menu.Item key="Products">
             <Link to="/cart" style={{ color: "#136a2f" }}>Products</Link>
           </Menu.Item>
-
       </Menu>
     </Header>
   );

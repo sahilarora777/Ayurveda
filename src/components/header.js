@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "antd/dist/reset.css";
 import { Layout, Menu } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import logo from "../assets/logo.png";
 
 const { Header } = Layout;
@@ -74,9 +75,12 @@ const AppHeader = () => {
           </Menu.Item>
         )}
         
-        <Menu.Item key="Products">
-            <Link to="/cart" style={{ color: "#136a2f" }}>Products</Link>
-          </Menu.Item>
+
+        <Menu.Item key="cart">
+          <Link to="/cart">
+            <ShoppingCartOutlined style={{ fontSize: "20px" }} /> Products (0)
+          </Link>
+        </Menu.Item>
       </Menu>
     </Header>
   );

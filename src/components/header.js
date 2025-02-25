@@ -75,11 +75,10 @@ const AppHeader = () => {
           </Menu.Item>
         )}
         
-        <Menu.Item key="cart">
-          <Link to="/cart">
-            <ShoppingCartOutlined style={{ fontSize: "20px" }} /> Cart (0)
-          </Link>
-        </Menu.Item>
+        <Menu.Item key="Products">
+            <Link to="/cart" style={{ color: "#136a2f" }}>Products</Link>
+          </Menu.Item>
+
       </Menu>
     </Header>
   );

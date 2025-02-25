@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useNavigate } from 'react-router-dom';
-import Homepage from './slider';
+import AyurvedaSlider from './slider';
 
 const HomeProducts = () => {
   const navigate = useNavigate();
@@ -11,10 +11,9 @@ const HomeProducts = () => {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    fetch('https://express-backend-f6ji.onrender.com/api/home_products')
+    fetch('http://localhost:8080/api/home_products')
       .then(response => response.json())
       .then(data => {
         const latestProducts = Array.isArray(data.products) ? data.products.slice(0, 5) : [];
@@ -27,23 +26,49 @@ const HomeProducts = () => {
         setLoading(false);
       });
 
-    fetch('https://express-backend-f6ji.onrender.com/api/banners')
+    fetch('http://localhost:8080/api/banners')
       .then(response => response.json())
       .then(data => setBanners(data))
       .catch(error => console.error('Error fetching banners:', error));
   }, []);
 
-  const openProductPopup = (product) => {
-    setSelectedProduct(product);
+  const bannerSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000
   };
 
-  const closeProductPopup = () => {
-    setSelectedProduct(null);
+  const productSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1
+        }
+      }
+    ]
   };
 
   return (
     <div className="container mx-auto p-4">
-      <Slider dots autoplay autoplaySpeed={3000}>
+      <Slider {...bannerSettings}>
         {banners.length > 0 ? (
           banners.map(banner => (
             <div key={banner._id}>
@@ -62,34 +87,34 @@ const HomeProducts = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map(product => (
-            <div key={product._id} className="cursor-pointer bg-white border rounded-2xl shadow-lg p-4" onClick={() => openProductPopup(product)}>
-              <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-contain" />
-              <h3 className="text-xl font-semibold mt-2">{product.name}</h3>
-              <p className="text-gray-600">{product.description}</p>
-              <p className="text-green-600 font-bold mt-2">₹{product.price}</p>
-            </div>
-          ))}
-        </div>
+        <Slider {...productSettings}>
+          {products.length > 0 ? (
+            products.map(product => (
+              <div key={product._id} className="px-4">
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-4 object-cover">
+                  <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-contain" />
+                  <div>
+                    <h3 className="text-4xl font-semibold">{product.name}</h3>
+                    <p className="text-2xl text-gray-600">{product.description}</p>
+                    <p className="text-2xl text-green-600 font-bold mt-2">₹{product.price}</p>
+                    <div className="flex gap-2 mt-4">
+                      <button 
+                        className="bg-black text-white px-6 py-3 text-lg rounded-lg"  
+                        onClick={() => navigate('/cart')}>
+                        Add to Cart
+                      </button>
+                      <button className="bg-black text-white px-6 py-3 text-lg rounded-lg">Order</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No products available</p>
+          )}
+        </Slider>
       )}
-      {<Homepage/>}
-
-      {selectedProduct && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-            <button className="absolute top-2 right-2 text-xl" onClick={closeProductPopup}>&times;</button>
-            <img src={selectedProduct.imageUrl} alt={selectedProduct.name} className="w-full h-48 object-contain" />
-            <h3 className="text-xl font-semibold mt-2">{selectedProduct.name}</h3>
-            <p className="text-gray-600">{selectedProduct.description}</p>
-            <p className="text-green-600 font-bold mt-2">₹{selectedProduct.price}</p>
-            <div className="flex gap-2 mt-4">
-              <button className="bg-black text-white px-6 py-3 rounded-lg" onClick={() => navigate('/cart')}>Add to Cart</button>
-              <button className="bg-black text-white px-6 py-3 rounded-lg">Order</button>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };

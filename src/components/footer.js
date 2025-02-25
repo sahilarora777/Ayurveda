@@ -8,7 +8,7 @@ const AppFooter = () => {
   return (
     <Footer
       style={{
-        background: "#eb2f9636",
+        background: "#eb2f963b",
         padding: "40px 80px",
         borderTop: "2px solid #ddd",
       }}

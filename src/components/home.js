@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useNavigate } from 'react-router-dom';
-import AyurvedaSlider from './slider';
+import Homepage from './slider'
 
 const HomeProducts = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const HomeProducts = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/home_products')
+    fetch('https://express-backend-f6ji.onrender.com/api/home_products')
       .then(response => response.json())
       .then(data => {
         const latestProducts = Array.isArray(data.products) ? data.products.slice(0, 5) : [];
@@ -26,7 +26,7 @@ const HomeProducts = () => {
         setLoading(false);
       });
 
-    fetch('http://localhost:8080/api/banners')
+    fetch('https://express-backend-f6ji.onrender.com/api/banners')
       .then(response => response.json())
       .then(data => setBanners(data))
       .catch(error => console.error('Error fetching banners:', error));
@@ -91,7 +91,7 @@ const HomeProducts = () => {
           {products.length > 0 ? (
             products.map(product => (
               <div key={product._id} className="px-4">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-4 object-cover">
+                <div className="bg-white border: 2px solid #136a2f  rounded-2xl shadow-lg overflow-hidden p-4 object-contain">
                   <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-contain" />
                   <div>
                     <h3 className="text-4xl font-semibold">{product.name}</h3>
@@ -114,7 +114,7 @@ const HomeProducts = () => {
           )}
         </Slider>
       )}
-      
+      {<Homepage/>}
     </div>
   );
 };

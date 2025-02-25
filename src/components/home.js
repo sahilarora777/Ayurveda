@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useNavigate } from 'react-router-dom';
-import Homepage from './slider'
+import Homepage from './slider';
 
 const HomeProducts = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const HomeProducts = () => {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     fetch('https://express-backend-f6ji.onrender.com/api/home_products')
@@ -91,16 +92,22 @@ const HomeProducts = () => {
           {products.length > 0 ? (
             products.map(product => (
               <div key={product._id} className="px-4">
-                <div className="bg-white border: 2px solid #136a2f  rounded-2xl shadow-lg overflow-hidden p-4 object-contain">
-                  <img src={product.imageUrl} alt={product.name} className="w-full h-48 object-contain" />
+                <div className="bg-white border-2 border-green-600 rounded-2xl shadow-lg overflow-hidden p-4 object-contain">
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="w-full h-48 object-contain cursor-pointer"
+                    onClick={() => setSelectedImage(product.imageUrl)}
+                  />
                   <div>
                     <h3 className="text-4xl font-semibold">{product.name}</h3>
                     <p className="text-2xl text-gray-600">{product.description}</p>
                     <p className="text-2xl text-green-600 font-bold mt-2">₹{product.price}</p>
                     <div className="flex gap-2 mt-4">
-                      <button 
-                        className="bg-black text-white px-6 py-3 text-lg rounded-lg"  
-                        onClick={() => navigate('/cart')}>
+                      <button
+                        className="bg-black text-white px-6 py-3 text-lg rounded-lg"
+                        onClick={() => navigate('/cart')}
+                      >
                         Add to Cart
                       </button>
                       <button className="bg-black text-white px-6 py-3 text-lg rounded-lg">Order</button>
@@ -114,7 +121,22 @@ const HomeProducts = () => {
           )}
         </Slider>
       )}
-      {<Homepage/>}
+
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center" onClick={() => setSelectedImage(null)}>
+          <div className="relative">
+            <img src={selectedImage} alt="Product" className="max-w-full max-h-screen rounded-lg shadow-lg" />
+            <button
+              className="absolute top-2 right-2 text-white text-3xl font-bold"
+              onClick={() => setSelectedImage(null)}
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
+
+      {<Homepage />}
     </div>
   );
 };
